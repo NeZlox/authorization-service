@@ -26,9 +26,9 @@ python-crontab = "^3"
 
 # Web Framework (Litestar ecosystem)
 litestar = { extras = ["standard"], version = "^2" }
-multidict = "6.2.0"
 litestar-granian = "^0"
 litestar-asyncpg = "^0"
+multidict = "6.2.0"
 
 # Logging
 structlog = "^24"
