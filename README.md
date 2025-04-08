@@ -24,18 +24,23 @@ Authentication and authorization service built with Litestar, AsyncPG, and advan
    git clone https://github.com/NeZlox/authorization-service.git
    ```
 
-2. Set up environment variables:
+2. Navigate to the project directory:
+   ```bash
+   cd authorization-service
+   ```
+
+3. Set up environment variables:
    ```bash
    cp .env.example .env
    ```
    (Edit the `.env` file with your configuration)
 
-3. Start the services:
+4. Start the services:
    ```bash
    docker-compose up -d
    ```
 
-4. To stop the services:
+5. To stop the services:
    ```bash
    docker-compose down
    ```
