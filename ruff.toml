@@ -48,4 +48,3 @@ docstring-code-line-length = 72
 
 [lint.pydocstyle]
 convention = "google"
-
