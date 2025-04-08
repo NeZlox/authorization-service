@@ -34,7 +34,7 @@ def create_app():
 
     return Litestar(
         route_handlers=routers.routers_list,
-        openapi_config=openapi.config,
+        openapi_config=openapi.config if settings.app.MODE != 'PROD' else None,
         debug=settings.app.DEBUG,
         cors_config=cors_config,
         exception_handlers=collect_exception_handlers(),

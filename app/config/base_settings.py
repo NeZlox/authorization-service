@@ -147,9 +147,6 @@ class AppSettings:
     MODE: str = field(default_factory=lambda: os.getenv('MODE', 'DEV'))
     DEBUG: bool = field(default_factory=lambda: str_to_bool(os.getenv('DEBUG', 'False')))
 
-    HOST: str = field(init=False)
-    PORT: int = field(init=False)
-
     JWT_ALGORITHM: str = field(default_factory=lambda: os.getenv('JWT_ALGORITHM'))
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = field(
         default_factory=lambda: int(os.getenv('JWT_ACCESS_TOKEN_EXPIRE_MINUTES'))
@@ -165,10 +162,6 @@ class AppSettings:
 
         if self.MODE not in {'PROD', 'STAGE', 'DEV', 'TEST'}:
             raise ValueError(f'Invalid MODE: {self.MODE}. Must be one of `PROD`, `STAGE`, `DEV`, `TEST`.')
-
-        # Load host and port specific to the current environment
-        self.HOST = os.getenv(f'{self.MODE}_HOST', '127.0.0.1')
-        self.PORT = int(os.getenv(f'{self.MODE}_PORT', '8000'))
 
         # Load from pyproject.toml if exists
         with open(f'{os.curdir}/pyproject.toml') as file:

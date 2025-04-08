@@ -1,7 +1,9 @@
+# Core Formatting Rules
 line-length = 120
 target-version = "py312"
 indent-width = 4
 
+# Linting Configuration
 [lint]
 select = [
     "A",          # prevent using keywords that clobber python builtins
@@ -31,6 +33,7 @@ ignore = [
     "TC001"       # Type-checking imports
 ]
 
+# Formatting Preferences
 [format]
 indent-style = "space"
 skip-magic-trailing-comma = false
@@ -39,6 +42,7 @@ line-ending = "auto"
 docstring-code-format = true
 docstring-code-line-length = 72
 
+# Special Cases
 [lint.per-file-ignores]
 "app/infrastructure/db/migrations/*" = ["ALL"]
 

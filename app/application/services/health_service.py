@@ -46,10 +46,17 @@ class HealthService:
 
         try:
             # Basic database connectivity test
-            result = await self.db_session.execute(text('SELECT 1'))
-            if result.scalar() != 1:
+            result = await self.db_session.execute(
+                text("""
+                        SELECT schema_name
+                        FROM information_schema.schemata
+                        WHERE schema_name = :schema
+                    """),
+                {"schema": settings.postgres.SCHEMA}
+            )
+            if result.scalar() != settings.postgres.SCHEMA:
                 db_dependency.status = HealthStatus.ERROR
-                db_dependency.details = {'error': 'SELECT 1 returned unexpected value'}
+                db_dependency.details = {'error': f'Schema `{settings.postgres.SCHEMA}` not found'}
         except Exception as e:
             await logger.aerror(f'[HealthCheck] Ошибка при проверке Базы данных: {e}')
             db_dependency.status = HealthStatus.ERROR

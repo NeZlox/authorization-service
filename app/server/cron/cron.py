@@ -52,12 +52,13 @@ def write_cron():
     job = cron.new(
         command=f'cd {project_path} && export PYTHONPATH={project_path} && export POSTGRES_DSN={settings.postgres.DSN} '
                 f'&& export POSTGRES_SCHEMA={settings.postgres.SCHEMA} '
-                f'&& {python_path} app/server/cron/job/session_cleanup_job.py{debug_command}',
+                # relative to the project root ↓
+                f'&& {python_path} -m app.server.cron.job.session_cleanup_job{debug_command}',
         comment=settings.app.CRON_JOB_IDENTIFIER
     )
 
     # Schedule every 6 hours
-    job.every(6).hours()
+    job.hours.every(6)
 
     cron.write()
     logger.info('Cron job for running parsers 4 times a day has been added')

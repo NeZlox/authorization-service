@@ -132,7 +132,7 @@ def provide_search_filter(
     """
     # print(field, search_string)
     return SearchFilter(field_name=field, value=search_string,
-                        ignore_case=ignore_case or False)  # type: ignore[arg-type]
+                        ignore_case=ignore_case or False)
 
 
 def provide_order_by(
