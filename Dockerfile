@@ -51,7 +51,12 @@ COPY . /app
 WORKDIR /app
 
 # Make the entry script executable
-RUN chmod 777 /app/scripts/entry
+# Convert CRLF to LF and set executable permissions in a single layer
+# Note: Using sed instead of dos2unix to avoid additional package installation (dos2unix /app/scripts/entry)
+# - 's/\r$//' removes Windows-style carriage returns while preserving LF
+# - Combined with chmod for minimal layer overhead
+RUN sed -i 's/\r$//' /app/scripts/entry  \
+    && chmod +x /app/scripts/entry
 
 # Use the entry script as the container's entry point
 ENTRYPOINT ["/bin/bash", "/app/scripts/entry"]
