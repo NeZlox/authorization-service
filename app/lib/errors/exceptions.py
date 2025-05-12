@@ -20,7 +20,7 @@ class AppException(Exception):  # noqa: N818 - сохранено для обр�
     Base exception class for application errors.
     """
 
-    def __init__(self, message: str = "", details: Any = None) -> None:
+    def __init__(self, message: str = '', details: Any = None) -> None:
         self.message = message
         self.details = details
         super().__init__(self.message)
@@ -35,7 +35,7 @@ class JWTException(AppException):
     status_code = HTTP_500_INTERNAL_SERVER_ERROR
 
     def __init__(self, message: str | None = None, details: Any = None):
-        message = message or getattr(self, 'message', "")
+        message = message or getattr(self, 'message', '')
         super().__init__(message=message, details=details)
 
 
@@ -92,7 +92,7 @@ class UserException(AppException):
     message = 'Ошибка пользователя'
 
     def __init__(self, message: str | None = None, details: Any = None):
-        message = message or getattr(self, 'message', "")
+        message = message or getattr(self, 'message', '')
         super().__init__(message=message, details=details)
 
 

@@ -10,6 +10,7 @@ from app.config.app_settings import get_settings
 from app.lib.errors.handlers import collect_exception_handlers
 from app.server import openapi, plugins, routers
 from app.server.life_cycle import provide_lifespan_service, shutdown_callables_list, startup_callables_list
+from app.server.middlewares import middlewares_list
 from app.server.query_dependencies import create_collection_dependencies
 
 settings = get_settings()
@@ -38,6 +39,7 @@ def create_app():
         debug=settings.app.DEBUG,
         cors_config=cors_config,
         exception_handlers=collect_exception_handlers(),
+        middleware=middlewares_list,
         plugins=[
             plugins.alchemy,
             plugins.structlog,

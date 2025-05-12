@@ -12,8 +12,8 @@ readme = "README.md"
 # - Local path version (development): links to local SDK for active development
 # Switch between these by commenting/uncommenting as needed
 
-personal_growth_sdk = { git = "https://github.com/NeZlox/personal-growth-sdk.git", branch = "main" }
-# personal_growth_sdk = { path = "../personal-growth-sdk", develop = true }
+#personal_growth_sdk = { git = "https://github.com/NeZlox/personal-growth-sdk.git", branch = "main" }
+personal_growth_sdk = { path = "../personal-growth-sdk", develop = true }
 
 # Core Python version requirement
 python = "^3.12"

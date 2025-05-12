@@ -19,8 +19,10 @@ from sqlalchemy.orm import selectinload
 
 from app.adapters.inbound.http.urls.user_urls import (
     DELETE_USER_URI,
+    GET_CURRENT_USER_URI,
     GET_USER_URI,
     GET_USERS_URI,
+    POST_REGISTER_USER_URI,
     POST_USER_URI,
     PREFIX,
     PUT_USER_URI,
@@ -52,7 +54,7 @@ class UserController(Controller):
     tags = ['User']  # noqa: RUF012
 
     @post(
-        path='/register/',
+        path=POST_REGISTER_USER_URI,
         operation_id='RegisterUser',
         name='users:register',
         summary='Register new user',
@@ -85,7 +87,7 @@ class UserController(Controller):
         return user_service.to_schema(db_obj, schema_type=UserResponse)
 
     @get(
-        path='/me/',
+        path=GET_CURRENT_USER_URI,
         operation_id='GetCurrentUser',
         name='users:me',
         summary='Get current user profile',

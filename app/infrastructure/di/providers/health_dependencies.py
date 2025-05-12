@@ -35,4 +35,3 @@ async def provide_health_service(
         db_session=db_session
 
     )
-

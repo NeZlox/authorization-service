@@ -14,6 +14,7 @@ from litestar.openapi import ResponseSpec
 from litestar.params import Body
 from litestar.response import Response
 from litestar.status_codes import HTTP_200_OK, HTTP_204_NO_CONTENT
+from personal_growth_sdk.authorization.constants.authentication import AUTH_ACCESS_TOKEN_KEY, AUTH_REFRESH_TOKEN_KEY
 from personal_growth_sdk.authorization.schemas import UserLoginRequest, UserResponse
 
 from app.adapters.inbound.http.urls.auth_urls import (
@@ -23,12 +24,8 @@ from app.adapters.inbound.http.urls.auth_urls import (
     PREFIX,
     PUT_SESSIONS,
 )
-from app.config.constants import AUTH_ACCESS_TOKEN_KEY, AUTH_REFRESH_TOKEN_KEY
-from app.infrastructure.di.providers import provide_auth_service, provide_session_service, provide_user_service
-
-__all__ = ['AuthController']
-
 from app.application.services import SessionService, UserService
+from app.infrastructure.di.providers import provide_auth_service, provide_session_service, provide_user_service
 from app.infrastructure.di.providers.cookie_dependencies import (
     create_role_based_dependency,
     extract_client_info,
@@ -36,6 +33,8 @@ from app.infrastructure.di.providers.cookie_dependencies import (
 )
 from app.lib.schemas.client_info_schema import ClientInfoSchema
 from app.lib.security import RoleGroup
+
+__all__ = ['AuthController']
 
 
 class AuthController(Controller):
@@ -124,7 +123,7 @@ class AuthController(Controller):
         status_code=HTTP_204_NO_CONTENT,
         responses={
             HTTP_204_NO_CONTENT: ResponseSpec(
-                data_container=UserResponse,
+                data_container=None,
                 description='Token refreshed'
             )
         },

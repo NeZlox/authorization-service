@@ -52,7 +52,7 @@ class HealthService:
                         FROM information_schema.schemata
                         WHERE schema_name = :schema
                     """),
-                {"schema": settings.postgres.SCHEMA}
+                {'schema': settings.postgres.SCHEMA}
             )
             if result.scalar() != settings.postgres.SCHEMA:
                 db_dependency.status = HealthStatus.ERROR

@@ -83,7 +83,7 @@ def provide_select_in_str_filter[T](
         CollectionFilter[str]: Filter for a scoping query to a limited set of values.
     """
     processed_values = values.split(',') if values else []
-    processed_values = [value.strip() for value in processed_values if value != ""]
+    processed_values = [value.strip() for value in processed_values if value != '']
 
     return CollectionFilter(field_name=column, values=processed_values)
 

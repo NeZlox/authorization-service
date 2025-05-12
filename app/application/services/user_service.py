@@ -8,11 +8,10 @@ from personal_growth_sdk.authorization.models import User
 from personal_growth_sdk.authorization.schemas import UserCreateRequest
 
 from app.adapters.outbound.repositories import UserRepository
-
-__all__ = ['UserService']
-
 from app.lib.errors.exceptions import UserAlreadyExistsByEmailException
 from app.lib.security import PasswordManager
+
+__all__ = ['UserService']
 
 
 class UserService(SQLAlchemyAsyncRepositoryService[User]):

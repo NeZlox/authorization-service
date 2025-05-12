@@ -3,9 +3,9 @@ from .health_service import HealthService
 from .session_service import SessionService
 from .user_service import UserService
 
-__all__ = (
+__all__ = [
     'AuthService',
     'HealthService',
     'SessionService',
-    'UserService',
-)
+    'UserService'
+]

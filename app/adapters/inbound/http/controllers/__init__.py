@@ -3,9 +3,9 @@ from .health_controller import HealthController
 from .session_controller import SessionController
 from .user_controller import UserController
 
-__all__ = (
+__all__ = [
     'AuthController',
     'HealthController',
     'SessionController',
-    'UserController',
-)
+    'UserController'
+]

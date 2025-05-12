@@ -9,12 +9,17 @@ import msgspec
 from litestar import Request
 from litestar.datastructures import Cookie
 from litestar.params import Dependency
+from personal_growth_sdk.authorization.constants.authentication import AUTH_ACCESS_TOKEN_KEY, AUTH_REFRESH_TOKEN_KEY
+from personal_growth_sdk.authorization.constants.http_headers import (
+    HEADER_DEVICE_FINGERPRINT,
+    HEADER_USER_AGENT,
+    HEADER_X_FORWARDED_FOR,
+)
 from personal_growth_sdk.authorization.models.enums import RoleType
 from personal_growth_sdk.authorization.schemas import UserResponse
 
 from app.application.services import UserService
 from app.config.base_settings import get_settings
-from app.config.constants import AUTH_ACCESS_TOKEN_KEY, AUTH_REFRESH_TOKEN_KEY
 from app.lib.errors.exceptions import JWTAbsentException, JWTInvalidException, UserAccessDeniedException
 from app.lib.schemas.client_info_schema import ClientInfoSchema
 from app.lib.schemas.token_payload import TokenPayloadSchema
@@ -87,9 +92,9 @@ def extract_client_info(request: Request) -> ClientInfoSchema:
     """
 
     client_info = ClientInfoSchema(
-        ip=request.client.host if request.client else None,
-        user_agent=request.headers.get('user-agent'),
-        fingerprint=request.headers.get('x-device-fingerprint') or '',
+        ip=request.headers.get(HEADER_X_FORWARDED_FOR) or '',
+        user_agent=request.headers.get(HEADER_USER_AGENT),
+        fingerprint=request.headers.get(HEADER_DEVICE_FINGERPRINT) or '',
         access_token=request.cookies.get(AUTH_ACCESS_TOKEN_KEY),
         refresh_token=request.cookies.get(AUTH_REFRESH_TOKEN_KEY)
     )
